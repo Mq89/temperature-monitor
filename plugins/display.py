@@ -159,13 +159,13 @@ class SegPlugin:
             t = int(time.strftime("%H"))
             self._value = self._formatValue(self._tin)
             GPIO.output(self._LED, 0)
-            if t in _HOURS:
+            if t in self._HOURS:
                 GPIO.output(self._LED3, 1)
             time.sleep(wait)
 
 	    # outside
             self._value = self._formatValue(self._tout)
-            if t in _HOURS:
+            if t in self._HOURS:
                 GPIO.output(self._LED, 1)
             GPIO.output(self._LED3, 0)
             time.sleep(wait)
