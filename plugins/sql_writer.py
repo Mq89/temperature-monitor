@@ -13,7 +13,7 @@ class SQLWriter():
         self._user = "temperature"
         self._server = "nurthack"
         self._db = "sensors"
-        self._tab = "data"
+        self._tab = "data"  
 
     def update(self, mod, tin, tout):
         """
