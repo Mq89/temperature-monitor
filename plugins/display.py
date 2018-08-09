@@ -12,10 +12,12 @@ class SegPlugin:
     _HOURS = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]
 
     # GPIO pins for the 7 segmets
-    _SEGMENTS = (3,5,7,11,13,15,19)
+    #             A  B  C   D   E   F   G
+    _SEGMENTS = (18, 7, 3, 13, 11, 23, 22)
 
     # GPIO to select the digits
-    _DIGITS = (8,10,12,16)
+    #           1   2   3  4
+    _DIGITS = (16, 15, 10, 5)
 
     # which of the 7 segments should be switched on to display the character
     _NUM = {
@@ -34,11 +36,12 @@ class SegPlugin:
     }
 
     # GPIO pin for the dots between the digits
-    _DP = 21
+    _DP = 8
 
-    _LED = 22   # indicating outside temperature
-    _LED2 = 24  # indicating inside temperature
-    _LED3 = 23  # warning indicator (outside warmer than inside, outside below 0 degrees)
+    # LEDs
+    _LED = 21   # indicating outside temperature (green)
+    _LED2 = 19  # indicating inside temperature (blue)
+    _LED3 = 24  # warn (red)
 
     def __init__(self):
         """
