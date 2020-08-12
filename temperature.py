@@ -6,7 +6,6 @@ from lib import temper
 import time
 import threading
 import usb.core
-from datetime import datetime
 
 
 class Temperature(threading.Thread):
