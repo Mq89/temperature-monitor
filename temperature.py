@@ -96,24 +96,21 @@ class Temperature(threading.Thread):
             # control loop
             while(self._run):
 
-                # save the time
-                start = datetime.now()
+                if int(time.time()) % self._intervall == 0:
 
-                # read values
-                tin = self.getTemperature(0)
-                tout = self.getTemperature(1)
+                    # read values
+                    tin = self.getTemperature(0)
+                    tout = self.getTemperature(1)
 
-                # update all attached plugins
-                self._notify(tin, tout)
+                    # update all attached plugins
+                    self._notify(tin, tout)
 
-                # calculate wait time
-                wait = int(self._intervall - (datetime.now() - start).total_seconds())
-
-                # wait in a loop to allow the programm to exit immediatly
-                while wait > 0 and self._run:
-                    self._log.debug("wait = {}".format(wait))
+                    # ensure that we end up in the next second
                     time.sleep(1)
-                    wait -= 1
+
+                # wait a bit less than a second to accommodate for
+                # the execution time of the loop
+                time.sleep(.99)
 
             self._log.info("left control loop")
         except KeyboardInterrupt:
