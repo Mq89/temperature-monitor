@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2020-08-12
+
 ### Added
 
 - Synchronise measurement with full minute.
@@ -14,5 +16,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Start changelog.
 
-[Unreleased]: https://github.com/Mq89/temperature-monitor/compare/v1.0.0...master
+[Unreleased]: https://github.com/Mq89/temperature-monitor/compare/v1.1.0...master
+[1.1.0]: https://github.com/Mq89/temperature-monitor/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/Mq89/temperature-monitor/tags/v1.0.0
