@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#-*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-
 
 import temperature
 from plugins import sql_writer
@@ -12,7 +12,6 @@ import time
 def main():
 
     # set up logging
-    # logging.basicConfig(filename="temperature.log", level=logging.INFO, format='%(asctime)-15s %(name)-15s: %(message)s')
     logging.config.fileConfig('logging.conf')
     log = logging.getLogger("Main")
     log.info("###### NEW INSTANCE #####")
@@ -34,6 +33,7 @@ def main():
         time.sleep(1)
     log.info("left main method")
 
+
 class GracefulKiller:
     """
     @brief      Class to catch SIGTERM and stop an enclosed thread.
@@ -42,7 +42,7 @@ class GracefulKiller:
     def __init__(self, thread):
         """
         @brief      Constructs the object.
-        
+
         @param      self    The object
         @param      thread  The thread to stop, after catching SIGTERM
         """
@@ -55,15 +55,15 @@ class GracefulKiller:
     def _exit_gracefully(self, signum, frame):
         """
         @brief      Method to catch SIGTERM
-        
+
         @param      self    The object
         @param      signum  The signum
         @param      frame   The frame
-        
+
         @return     None
         """
         logging.getLogger(str(self)).info("received SIGTERM")
-        if not self._thread == None:
+        if self._thread is not None:
             # stop the enclosed thread
             self._thread.stop()
         self._run = False
@@ -71,9 +71,9 @@ class GracefulKiller:
     def getRun(self):
         """
         @brief      Returns true as long as no SIGTERM has been catched.
-        
+
         @param      self  The object
-        
+
         @return     Boolean. True as long as no SIGTERM has been catched.
         """
         return self._run
@@ -81,6 +81,6 @@ class GracefulKiller:
     def __str__(self):
         return self.__class__.__name__
 
+
 if __name__ == '__main__':
     main()
-

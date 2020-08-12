@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#-*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-
 
 import logging
 from lib import temper
@@ -17,58 +17,58 @@ class Temperature(threading.Thread):
         threading.Thread.__init__(self)
         self._log = logging.getLogger(str(self))
         self._log.info("{0} init".format(self))
-        
+
         self._observers = []
         self._temper = temper.TemperHandler()
         self._intervall = 60
         self._run = True
-    
+
     def attach(self, obs):
         """
         @brief      Attach a observer
-        
+
         @param      self  The object
         @param      obs   The observer to attach
-        
+
         @return     None
         """
         self._log.info("attached observer " + str(obs))
-        if not obs in self._observers:
+        if obs not in self._observers:
             self._observers.append(obs)
 
     def stop(self):
         """
         @brief      Stop this class and all observers.
-        
+
         @param      self  The object
-        
+
         @return     None
         """
         for obs in self._observers:
             obs.stop()
         self._run = False
         self._log.info("{0} stopped".format(self))
-    
+
     def _notify(self, tin, tout):
         """
         @brief      Update all observers with new temperature values.
-        
+
         @param      self  The object
         @param      tin   The new inside temperature
         @param      tout  The new outside temperature
-        
+
         @return     None
         """
         for obs in self._observers:
             obs.update(self, tin, tout)
-    
-    def getTemperature(self, dev = 0):
+
+    def getTemperature(self, dev=0):
         """
         @brief      Read the temperature from a device.
-        
+
         @param      self  The object
         @param      dev   The device to read the temperature value from.
-        
+
         @return     A float greater or equal than self.MIN_VALUE.
         """
         self._log.debug("getTemperature({})".format(dev))
@@ -82,14 +82,13 @@ class Temperature(threading.Thread):
             self._log.error(e)
             return Temperature.MIN_VALUE
 
-
     def run(self):
         """
         @brief      Control logic, reading the temperature values every
                     self._intervall seconds
-        
+
         @param      self  The object
-        
+
         @return     { description_of_the_return_value }
         """
         try:
