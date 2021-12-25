@@ -1,9 +1,10 @@
 #!/usr/bin/env python
-#-*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-
 
 import MySQLdb
 import logging
 import temperature as t
+
 
 class SQLWriter():
     def __init__(self):
@@ -11,9 +12,9 @@ class SQLWriter():
         self._log.info("{0} init".format(self))
 
         self._user = "temperature"
-        self._server = "nurthack"
+        self._server = "192.168.0.3"
         self._db = "sensors"
-        self._tab = "data"  
+        self._tab = "data"
 
     def update(self, mod, tin, tout):
         """
@@ -47,7 +48,7 @@ class SQLWriter():
                 self._log.error("tout out of range: {0}".format(tout))
             connection.commit()
             connection.close()
-        except MySQLdb.OperationalError as e:
+        except MySQLdb.OperationalError:
             self._log.error("Connection Error: Values {0}, {1}".format(tin, tout))
 
     def stop(self):
