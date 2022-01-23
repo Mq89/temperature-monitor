@@ -18,3 +18,15 @@ The display shows the current temperature values.
 Documentation for the display can be found in [docs/LITES11557-1.pdf](docs/LITES11557-1.pdf).
 Two LEDs show whether the 7 segment display shows outside or inside temperature.
 The third LED shows whether it is warmer outside than inside or whether the outside temperature is below 0°C.
+
+## Install service
+
+    install temperature-monitor.service /lib/systemd/system/
+
+    # first install
+    systemctl enable temperature-monitor.service
+
+    # already installed
+    systemctl daemon-reload
+
+    systemctl start temperature-monitor.service
