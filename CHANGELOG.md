@@ -25,4 +25,4 @@ Start changelog.
 [Unreleased]: https://github.com/Mq89/temperature-monitor/compare/v1.2.0...master
 [1.2.0]: https://github.com/Mq89/temperature-monitor/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/Mq89/temperature-monitor/compare/v1.0.0...v1.1.0
-[1.0.0]: https://github.com/Mq89/temperature-monitor/tags/v1.0.0
+[1.0.0]: https://github.com/Mq89/temperature-monitor/releases/tag/v1.0.0
