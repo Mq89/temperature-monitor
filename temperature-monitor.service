@@ -1,11 +1,11 @@
 [Unit]
 Description=Temperature Monitor
 After=network.target
-User=pi
 
 [Service]
 Type=simple
 ExecStart=/home/pi/temperature/main.py
+User=pi
 
 [Install]
 WantedBy=multi-user.target
