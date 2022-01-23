@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2022-01-23
+
 ### Added
 
 - Add systemd unit to automatically start and stop the service.
@@ -20,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Start changelog.
 
-[Unreleased]: https://github.com/Mq89/temperature-monitor/compare/v1.1.0...master
+[Unreleased]: https://github.com/Mq89/temperature-monitor/compare/v1.2.0...master
+[1.2.0]: https://github.com/Mq89/temperature-monitor/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/Mq89/temperature-monitor/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/Mq89/temperature-monitor/tags/v1.0.0
