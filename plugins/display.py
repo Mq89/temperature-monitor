@@ -9,7 +9,7 @@ import logging
 class SegPlugin:
 
     # hours of day where the LED are allowed to be active
-    _HOURS = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]
+    _HOURS = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
 
     # GPIO pins for the 7 segmets
     #             A  B  C   D   E   F   G
@@ -107,12 +107,16 @@ class SegPlugin:
         self._tin = tin
         self._tout = tout
 
+        self._log.debug("update()")
+        self._log.debug("tin = {}, tout = {}, _led() = {}".format(tin, tout, self._led()))
         # schalte LED2 ein, wenn draußen wärmer als drinnen, oder wenn draußen
         # kälter als 0°C
-        if (tin < tout or tout < 0):
+        if (tin < tout or tout < 0) and self._led():
             GPIO.output(self._LED2, 1)
+            self._log.debug("Turn on red led")
         else:
             GPIO.output(self._LED2, 0)
+            self._log.debug("Turn off red led")
 
     def stop(self):
         """
@@ -137,14 +141,18 @@ class SegPlugin:
         """
         while self._run:
             for digit in range(4):
-                GPIO.output(self._SEGMENTS, self._NUM[self._value[digit]])
-                GPIO.output(self._DIGITS[digit], 1)
-                if digit == 2:
-                    GPIO.output(self._DP, 0)
+                if self._led():
+                    GPIO.output(self._SEGMENTS, self._NUM[self._value[digit]])
+                    GPIO.output(self._DIGITS[digit], 1)
+                    if digit == 2:
+                        GPIO.output(self._DP, 0)
+                    else:
+                        GPIO.output(self._DP, 1)
+                    time.sleep(0.001)
+                    GPIO.output(self._DIGITS[digit], 0)
                 else:
                     GPIO.output(self._DP, 1)
-                time.sleep(0.001)
-                GPIO.output(self._DIGITS[digit], 0)
+                    time.sleep(1)
 
     def _alternate(self):
         """
@@ -159,16 +167,15 @@ class SegPlugin:
     
         while self._run:
 	    # inside
-            t = int(time.strftime("%H"))
             self._value = self._formatValue(self._tin)
             GPIO.output(self._LED, 0)
-            if t in self._HOURS:
+            if self._led():
                 GPIO.output(self._LED3, 1)
             time.sleep(wait)
 
 	    # outside
             self._value = self._formatValue(self._tout)
-            if t in self._HOURS:
+            if self._led():
                 GPIO.output(self._LED, 1)
             GPIO.output(self._LED3, 0)
             time.sleep(wait)
@@ -191,6 +198,9 @@ class SegPlugin:
             newValue = " "
         newValue += '{:4.1f}'.format(abs(value))
         return newValue.replace(".", "")
+
+    def _led(self):
+        return int(time.strftime("%H")) in self._HOURS
 
 
     def __str__(self):
